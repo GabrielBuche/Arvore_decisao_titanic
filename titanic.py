@@ -29,7 +29,7 @@ def tratar_dados(data):
     X_incomplete = data_incompleta.drop('Age', axis=1)
     y_complete = data_completa['Age']
 
-    arvore_Age = DecisionTreeRegressor(criterion='entropy',max_depth=6)
+    arvore_Age = DecisionTreeRegressor()
 
     arvore_Age.fit(X_complete, y_complete)
 
@@ -42,10 +42,10 @@ def tratar_dados(data):
     return data_filled
 
 def gerar_arvore_decisao():
-    data = pd.read_csv('titanic_tratado.csv')
+    data_in = tratar_dados(data)
 
-    X = data.drop('Survived', axis=1)
-    Y = data['Survived']
+    X = data_in.drop('Survived', axis=1)
+    Y = data_in['Survived']
 
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
 
